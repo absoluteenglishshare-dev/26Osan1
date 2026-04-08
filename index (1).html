@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABSOLUTE 영어 | 오산고 1학년 1학기 1차 대비</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --blue: #1a56db;
+  --sky: #3b82f6;
+  --accent: #f59e0b;
+  --green: #10b981;
+  --red: #ef4444;
+  --white: #ffffff;
+  --gray1: #f8fafc;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --card: #ffffff;
+  --shadow: 0 4px 24px rgba(10,22,40,0.10);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Noto Sans KR', sans-serif; background: var(--gray1); color: var(--navy); min-height: 100vh; }
+
+header {
+  background: var(--navy); padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top:0; z-index:100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--accent); letter-spacing: 2px; }
+.subtitle { color: var(--gray3); font-size:0.72rem; font-weight:500; margin-top:1px; }
+
+.tab-nav { display:flex; background:var(--white); border-bottom:2px solid var(--gray2); position:sticky; top:56px; z-index:90; }
+.tab-btn { flex:1; padding:14px 8px; border:none; background:none; cursor:pointer; font-family:'Noto Sans KR',sans-serif; font-size:0.85rem; font-weight:700; color:var(--gray3); border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.2s; }
+.tab-btn.active { color:var(--blue); border-bottom-color:var(--blue); }
+.tab-btn span { display:block; font-size:1.1rem; margin-bottom:2px; }
+
+.section { display:none; padding:20px 16px 100px; }
+.section.active { display:block; }
+
+.card { background:var(--card); border-radius:16px; padding:20px; box-shadow:var(--shadow); margin-bottom:16px; }
+.section-title { font-size:1rem; font-weight:900; color:var(--navy); margin-bottom:14px; }
+
+.unit-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
+.unit-btn { padding:10px 4px; border-radius:10px; border:2px solid var(--gray2); background:var(--white); font-family:'Noto Sans KR',sans-serif; font-size:0.78rem; font-weight:700; color:var(--gray3); cursor:pointer; transition:all 0.18s; text-align:center; }
+.unit-btn.selected { border-color:var(--blue); background:#eff6ff; color:var(--blue); }
+.unit-btn .unit-count { font-size:0.65rem; font-weight:400; display:block; margin-top:1px; color:var(--gray3); }
+
+.start-quiz-btn { width:100%; padding:15px; background:var(--blue); color:var(--white); border:none; border-radius:12px; font-family:'Noto Sans KR',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s; margin-bottom:16px; }
+.start-quiz-btn:hover { background:#1d4ed8; }
+.start-quiz-btn:disabled { background:var(--gray2); color:var(--gray3); cursor:not-allowed; }
+
+#quiz-area { display:none; }
+.progress-bar-wrap { background:var(--gray2); border-radius:999px; height:6px; margin-bottom:16px; }
+.progress-bar { height:6px; border-radius:999px; background:var(--blue); transition:width 0.3s; }
+.progress-text { font-size:0.75rem; color:var(--gray3); margin-bottom:8px; text-align:right; }
+
+.flashcard { background:var(--navy); border-radius:20px; min-height:180px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 24px; margin-bottom:16px; position:relative; box-shadow:0 8px 32px rgba(10,22,40,0.18); }
+.card-type-badge { position:absolute; top:14px; left:14px; font-size:0.7rem; font-weight:700; padding:3px 10px; border-radius:999px; }
+.badge-syn { background:#d1fae5; color:#065f46; }
+.badge-ant { background:#fee2e2; color:#991b1b; }
+.badge-word { background:#dbeafe; color:#1e40af; }
+
+.card-question { font-size:1.5rem; font-weight:900; color:var(--white); text-align:center; line-height:1.4; word-break:keep-all; }
+.card-subtext { font-size:0.78rem; color:rgba(255,255,255,0.5); margin-top:8px; text-align:center; }
+
+.options-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+.option-btn { padding:14px 10px; border-radius:12px; border:2px solid var(--gray2); background:var(--white); font-family:'Noto Sans KR',sans-serif; font-size:0.88rem; font-weight:600; color:var(--navy); cursor:pointer; transition:all 0.15s; text-align:center; line-height:1.3; word-break:keep-all; }
+.option-btn:active { transform:scale(0.97); }
+.option-btn.correct { background:#d1fae5; border-color:var(--green); color:#065f46; }
+.option-btn.wrong { background:#fee2e2; border-color:var(--red); color:#991b1b; }
+.option-btn:disabled { cursor:default; }
+
+.result-box { border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+.result-box.correct { background:#d1fae5; border:1px solid #6ee7b7; }
+.result-box.wrong { background:#fee2e2; border:1px solid #fca5a5; }
+.result-title { font-size:0.95rem; font-weight:900; margin-bottom:8px; }
+.result-title.correct { color:#065f46; }
+.result-title.wrong { color:#991b1b; }
+.result-meaning { font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+.result-original { font-size:0.8rem; color:var(--gray3); margin-bottom:4px; }
+.result-syn { font-size:0.82rem; color:#065f46; font-weight:600; }
+.result-ant { font-size:0.82rem; color:#991b1b; font-weight:600; }
+
+.nav-btns { display:flex; gap:10px; }
+.nav-btn { flex:1; padding:13px; border-radius:12px; border:none; font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; font-weight:700; cursor:pointer; transition:all 0.15s; }
+.btn-next { background:var(--blue); color:var(--white); }
+.btn-reset { background:var(--gray2); color:var(--navy); }
+
+.score-card { text-align:center; padding:32px 20px; }
+.score-num { font-family:'Bebas Neue',sans-serif; font-size:4rem; color:var(--blue); line-height:1; }
+.score-emoji { font-size:2.5rem; margin-bottom:8px; }
+
+.passage-box { background:#f8fafc; border-left:4px solid var(--blue); border-radius:0 12px 12px 0; padding:16px; margin-bottom:16px; font-size:0.88rem; line-height:1.8; color:#1e293b; }
+.q-label { font-size:0.78rem; font-weight:700; color:var(--blue); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+.q-text { font-size:0.92rem; font-weight:700; color:var(--navy); margin-bottom:14px; line-height:1.5; word-break:keep-all; }
+.tag { display:inline-block; font-size:0.68rem; font-weight:700; padding:2px 8px; border-radius:999px; margin-right:6px; margin-bottom:8px; }
+.tag-blue { background:#dbeafe; color:#1e40af; }
+.tag-amber { background:#fef3c7; color:#92400e; }
+.tag-green { background:#d1fae5; color:#065f46; }
+
+.answer-input { width:100%; padding:13px 14px; border:2px solid var(--gray2); border-radius:10px; font-size:0.9rem; font-family:'Noto Sans KR',sans-serif; outline:none; transition:border 0.2s; margin-bottom:10px; }
+.answer-input:focus { border-color:var(--blue); }
+.answer-input.correct { border-color:var(--green); background:#f0fdf4; }
+.answer-input.wrong { border-color:var(--red); background:#fef2f2; }
+.check-btn { width:100%; padding:13px; background:var(--navy); color:var(--white); border:none; border-radius:10px; font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; font-weight:700; cursor:pointer; transition:background 0.2s; margin-bottom:10px; }
+.check-btn:hover { background:var(--blue); }
+.answer-reveal { display:none; padding:12px 14px; border-radius:10px; font-size:0.85rem; font-weight:600; line-height:1.6; }
+.answer-reveal.show { display:block; }
+.answer-reveal.correct { background:#d1fae5; color:#065f46; }
+.answer-reveal.wrong { background:#fee2e2; color:#991b1b; }
+
+.zone-label { font-size:0.72rem; font-weight:700; color:var(--gray3); margin-bottom:6px; letter-spacing:0.5px; }
+.sentence-pieces { display:flex; flex-wrap:wrap; gap:8px; min-height:60px; background:#f1f5f9; border-radius:12px; padding:12px; margin-bottom:12px; border:2px dashed var(--gray2); }
+.sentence-pieces.answer-zone { background:#eff6ff; border-color:var(--sky); min-height:70px; }
+.piece { padding:8px 13px; background:var(--white); border:2px solid var(--gray2); border-radius:8px; font-size:0.82rem; font-weight:600; font-family:'DM Mono',monospace; cursor:pointer; user-select:none; transition:all 0.15s; color:var(--navy); }
+.piece:hover { border-color:var(--blue); background:#eff6ff; }
+.piece.placed { background:#dbeafe; border-color:var(--blue); }
+
+.blank-input { display:inline-block; border:none; border-bottom:2px solid var(--blue); background:transparent; font-size:0.9rem; font-family:'Noto Sans KR',sans-serif; width:110px; text-align:center; outline:none; padding:0 4px; color:var(--navy); font-weight:700; }
+.blank-input.correct { border-bottom-color:var(--green); color:var(--green); }
+.blank-input.wrong { border-bottom-color:var(--red); color:var(--red); }
+
+@media(max-width:400px) { .unit-grid { grid-template-columns:repeat(3,1fr); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">ABSOLUTE 영어</div>
+    <div class="subtitle">오산고 1학년 · 2026 1학기 1차 대비</div>
+  </div>
+  <div style="font-size:1.4rem;">📚</div>
+</header>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('vocab')" id="tab-vocab"><span>🔤</span>단어</button>
+  <button class="tab-btn" onclick="showTab('grammar')" id="tab-grammar"><span>✏️</span>어법</button>
+  <button class="tab-btn" onclick="showTab('fill')" id="tab-fill"><span>📝</span>빈칸</button>
+  <button class="tab-btn" onclick="showTab('order')" id="tab-order"><span>🔀</span>순서</button>
+</div>
+
+<!-- 단어 탭 -->
+<div class="section active" id="sec-vocab">
+  <div class="card" id="unit-select-area">
+    <div class="section-title">📖 강 선택 (복수 선택 가능)</div>
+    <div class="unit-grid" id="unit-grid"></div>
+    <button class="start-quiz-btn" id="start-btn" onclick="startVocabQuiz()" disabled>강을 선택하세요</button>
+    <div style="font-size:0.75rem;color:var(--gray3);text-align:center;">
+      단어 · <span style="color:#065f46;font-weight:700;">(유)</span> 유의어 → 한글 뜻 찾기
+    </div>
+  </div>
+
+  <div id="quiz-area">
+    <div class="card">
+      <div class="progress-text" id="progress-text">0 / 0</div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+      <div class="flashcard" id="flashcard">
+        <span class="card-type-badge" id="card-badge"></span>
+        <div class="card-question" id="card-question">Loading...</div>
+        <div class="card-subtext" id="card-subtext"></div>
+      </div>
+      <div id="result-box-area"></div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="nav-btns">
+        <button class="nav-btn btn-reset" onclick="resetVocab()">← 강 선택</button>
+        <button class="nav-btn btn-next" id="next-btn" onclick="nextCard()" style="display:none">다음 →</button>
+      </div>
+    </div>
+    <div class="card score-card" id="score-area" style="display:none">
+      <div class="score-emoji" id="score-emoji">🎉</div>
+      <div class="score-num" id="score-num">0</div>
+      <div style="font-size:1rem;font-weight:700;margin-bottom:4px;" id="score-total"></div>
+      <div style="font-size:0.85rem;color:var(--gray3);margin-bottom:16px;" id="score-label"></div>
+      <button class="start-quiz-btn" onclick="restartVocab()" style="margin-top:16px;">다시 풀기 🔄</button>
+      <button class="nav-btn btn-reset" onclick="resetVocab()" style="margin-top:8px;">강 다시 선택</button>
+    </div>
+  </div>
+</div>
+
+<!-- 어법 탭 -->
+<div class="section" id="sec-grammar">
+  <div class="card">
+    <div class="tag tag-blue">1강 1번</div><div class="tag tag-amber">어법 오류 수정</div>
+    <div class="q-label">Q1</div>
+    <div class="q-text">밑줄 친 ①~⑤ 중, <strong>어법상 틀린 것</strong>을 고르고 올바르게 고쳐 쓰시오.</div>
+    <div class="passage-box">
+      It was very kind of you <u>① offer</u> to provide refreshments at this month's council meeting. Unfortunately, due to a conflict at the community center, we've had to reschedule the meeting for September 17. Your contributions to the meeting are always much <u>② appreciate</u>, and I feel terrible for the change of date and <u>③ inconvenience</u> we've caused you. If you'd still like to provide refreshments, I understand <u>④ completely</u> and will be <u>⑤ happy</u> to call on another neighbor.
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;" id="g1-choices">
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g1','①')">①</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g1','②')">②</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g1','③')">③</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g1','④')">④</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g1','⑤')">⑤</button>
+    </div>
+    <input type="text" class="answer-input" id="g1-input" placeholder="올바른 형태 입력 (예: to offer)" />
+    <button class="check-btn" onclick="checkGrammar('g1','①','to offer')">확인하기</button>
+    <div class="answer-reveal" id="g1-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-blue">1강 3번</div><div class="tag tag-amber">어법 오류 수정</div>
+    <div class="q-label">Q2</div>
+    <div class="q-text">밑줄 친 ①~⑤ 중, <strong>어법상 틀린 것</strong>을 고르고 올바르게 고쳐 쓰시오.</div>
+    <div class="passage-box">
+      I've recently been informed <u>① that</u> you are proposing a plan to renovate our city's great historic landmark. Your proposed plan to increase the theater's seating capacity may be <u>② financially</u> sound. But everything I've heard leads me to believe that such a renovation would destroy the theater's architecture. With that in mind, I urge you to reconsider this renovation plan and <u>③ exploring</u> alternatives that will preserve the character of the Silverlight Theater while <u>④ securing</u> its financial stability. I strongly believe that we should not sacrifice the beauty and history of our city for <u>⑤ short-sighted</u> financial gain.
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;" id="g2-choices">
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g2','①')">①</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g2','②')">②</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g2','③')">③</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g2','④')">④</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g2','⑤')">⑤</button>
+    </div>
+    <input type="text" class="answer-input" id="g2-input" placeholder="올바른 형태 입력 (예: explore)" />
+    <button class="check-btn" onclick="checkGrammar('g2','③','explore')">확인하기</button>
+    <div class="answer-reveal" id="g2-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-blue">3강 1번</div><div class="tag tag-amber">어법 선택</div>
+    <div class="q-label">Q3</div>
+    <div class="q-text">(A), (B)의 괄호 안에서 <strong>어법에 맞는 표현</strong>을 골라 쓰시오.</div>
+    <div class="passage-box">
+      The expert myth is the belief that the more you know, the more creative you become. At the face of it, this seems quite <strong>(A) [logical / irrational]</strong>. The rationale is that in order to be truly creative, one must master a field or a domain. Research into the lives of creative people shows that in some cases expertise can actually <strong>(B) [cultivate / hinder]</strong> creative ability of individuals. As expertise grows, creativity sometimes diminishes.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+      <div><div class="zone-label">(A)</div><input type="text" class="answer-input" id="g3a-input" placeholder="logical / irrational" style="margin-bottom:0;" /></div>
+      <div><div class="zone-label">(B)</div><input type="text" class="answer-input" id="g3b-input" placeholder="cultivate / hinder" style="margin-bottom:0;" /></div>
+    </div>
+    <button class="check-btn" onclick="checkGrammar3()">확인하기</button>
+    <div class="answer-reveal" id="g3-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-blue">7강 1번</div><div class="tag tag-amber">어법 선택</div>
+    <div class="q-label">Q4</div>
+    <div class="q-text">(A), (B), (C)의 괄호 안에서 <strong>어법에 맞는 표현</strong>을 골라 쓰시오.</div>
+    <div class="passage-box">
+      Bessie Blount Griffin was born in Virginia in 1914. Teachers used to <strong>(A) [force / forcing]</strong> students to write with their right hands. Bessie studied nursing, <strong>(B) [which / what]</strong> sparked a passion for physical therapy. She created a neck frame for patients who needed support when <strong>(C) [held / holding]</strong> a bowl or cup close to their faces.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div><div class="zone-label">(A)</div><input type="text" class="answer-input" id="g4a-input" placeholder="force/forcing" style="margin-bottom:0;font-size:0.8rem;" /></div>
+      <div><div class="zone-label">(B)</div><input type="text" class="answer-input" id="g4b-input" placeholder="which/what" style="margin-bottom:0;font-size:0.8rem;" /></div>
+      <div><div class="zone-label">(C)</div><input type="text" class="answer-input" id="g4c-input" placeholder="held/holding" style="margin-bottom:0;font-size:0.8rem;" /></div>
+    </div>
+    <button class="check-btn" onclick="checkGrammar4()">확인하기</button>
+    <div class="answer-reveal" id="g4-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-blue">8강 1번</div><div class="tag tag-amber">어법 오류 수정</div>
+    <div class="q-label">Q5</div>
+    <div class="q-text">밑줄 친 ①~⑤ 중, <strong>어법상 틀린 것</strong>을 고르고 올바르게 고쳐 쓰시오.</div>
+    <div class="passage-box">
+      Many of the ancient urban centers obtained their food supply from intensive irrigated agriculture in the region <u>① where</u> they were located. It seems more relevant to point out <u>② that</u> this type of primitive subsistence system has a particularly high output per unit of land. The high demand for labor per unit of land and the high output per unit of land <u>③ making</u> it necessary and possible for a large number of families to live within a small area. Therefore, the total surplus <u>④ available</u> within a fairly small distance from the town will be large. The river <u>⑤ used</u> for irrigation can be used for boat transport of food to the town.
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;" id="g5-choices">
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g5','①')">①</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g5','②')">②</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g5','③')">③</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g5','④')">④</button>
+      <button class="option-btn" style="flex:none;padding:10px 16px;" onclick="selectGChoice('g5','⑤')">⑤</button>
+    </div>
+    <input type="text" class="answer-input" id="g5-input" placeholder="올바른 형태 입력 (예: made)" />
+    <button class="check-btn" onclick="checkGrammar('g5','③','made')">확인하기</button>
+    <div class="answer-reveal" id="g5-reveal"></div>
+  </div>
+</div>
+
+<!-- 빈칸 탭 -->
+<div class="section" id="sec-fill">
+  <div class="card">
+    <div class="tag tag-green">2강 1번</div><div class="tag tag-amber">요약문 빈칸</div>
+    <div class="q-label">Q1</div>
+    <div class="q-text">다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것을 쓰시오.</div>
+    <div class="passage-box" style="font-size:0.82rem;">
+      With great care, Robert arranged his instruments. His heart was pounding as he observed the morning shadows gradually descending the mountain. Each adjustment was made thoughtfully, all in anticipation of the cave's hidden entrance being unveiled. And then, it happened — a subtle flash of light, fleeting yet significant. In that brief moment, Robert captured the crucial data. Memories of his grandfather's captivating tales flooded his mind, filling him with a profound sense of connection and joy. Reflecting on the journey that had led him here, he uttered a single word — 'Fantastic!'
+    </div>
+    <div style="font-size:0.9rem;line-height:2.0;margin-bottom:16px;">
+      Robert's long-awaited moment of <input type="text" class="blank-input" id="f1a" placeholder="(A)" /> brought him not only scientific success but also a <input type="text" class="blank-input" id="f1b" placeholder="(B)" /> sense of joy and connection.
+    </div>
+    <button class="check-btn" onclick="checkFill('f1a','discovery','f1b','profound','f1-reveal')">확인하기</button>
+    <div class="answer-reveal" id="f1-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-green">3강 3번</div><div class="tag tag-amber">요약문 빈칸</div>
+    <div class="q-label">Q2</div>
+    <div class="q-text">다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것을 쓰시오.</div>
+    <div class="passage-box" style="font-size:0.82rem;">
+      We don't choose our earliest habits, we imitate them. We follow the script handed down by our friends and family, our church or school, our local community and society at large. Each of these cultures and groups comes with its own set of expectations and standards. In many ways, these social norms are the invisible rules that guide your behavior each day. You're always keeping them in mind, even if they are not at the top of your mind. Often, you follow the habits of your culture without thinking, without questioning.
+    </div>
+    <div style="font-size:0.9rem;line-height:2.0;margin-bottom:16px;">
+      The <input type="text" class="blank-input" id="f2a" placeholder="(A)" style="width:90px;"/> norms and customs of a culture serve as <input type="text" class="blank-input" id="f2b" placeholder="(B)" style="width:90px;"/> rules that unconsciously shape our everyday habits and behaviors.
+    </div>
+    <button class="check-btn" onclick="checkFill('f2a','social','f2b','invisible','f2-reveal')">확인하기</button>
+    <div class="answer-reveal" id="f2-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-green">8강 3번</div><div class="tag tag-amber">빈칸 추론</div>
+    <div class="q-label">Q3</div>
+    <div class="q-text">다음 글의 빈칸에 들어갈 말로 가장 적절한 것을 본문에서 찾아 쓰시오.</div>
+    <div class="passage-box" style="font-size:0.82rem;">
+      Not all innovations that improve human living standards show up in revenue and profits. Some instead accrue directly to consumers. Many of the product improvements brought about by technology have the paradoxical effect of reducing industry revenue. Suppose people used to pay $1 to download a song. Even if the number of people buying a song doubles with the lower price, revenue will still fall by 50 percent. But people, by which we mean society as a whole, will be much better off. The point is that revenue reduction is not by itself evidence that society is worse off.
+    </div>
+    <div style="font-size:0.9rem;line-height:2.0;margin-bottom:16px;">
+      Technological innovations may decrease industry <input type="text" class="blank-input" id="f3a" placeholder="(A)" style="width:90px;"/> but can still provide benefit to society by improving the living <input type="text" class="blank-input" id="f3b" placeholder="(B)" style="width:90px;"/> of individual consumers.
+    </div>
+    <button class="check-btn" onclick="checkFill('f3a','revenue','f3b','standards','f3-reveal')">확인하기</button>
+    <div class="answer-reveal" id="f3-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-green">7강 3번</div><div class="tag tag-amber">빈칸 추론</div>
+    <div class="q-label">Q4</div>
+    <div class="q-text">다음 글의 빈칸 (A), (B), (C)에 들어갈 말로 가장 적절한 것을 고르시오. <span style="color:var(--gray3);font-size:0.78rem;">[encouraged / founded / hired]</span></div>
+    <div class="passage-box" style="font-size:0.82rem;">
+      Florence Bascom was born in 1862. Bascom was raised by parents who strongly ___(A)___ their daughter to pursue an education. She graduated with a doctor's degree in geology in 1893. She ___(B)___ the first geology department at Bryn Mawr College, which she taught for 33 years. Additionally, Bascom was the first woman geologist ___(C)___ by the U.S. Geological Survey and worked there until 1936.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div><div class="zone-label">(A)</div><input type="text" class="answer-input" id="f4a" placeholder="동사" style="margin-bottom:0;font-size:0.82rem;"/></div>
+      <div><div class="zone-label">(B)</div><input type="text" class="answer-input" id="f4b" placeholder="동사" style="margin-bottom:0;font-size:0.82rem;"/></div>
+      <div><div class="zone-label">(C)</div><input type="text" class="answer-input" id="f4c" placeholder="과거분사" style="margin-bottom:0;font-size:0.82rem;"/></div>
+    </div>
+    <button class="check-btn" onclick="checkFill4()">확인하기</button>
+    <div class="answer-reveal" id="f4-reveal"></div>
+  </div>
+</div>
+
+<!-- 순서 탭 -->
+<div class="section" id="sec-order">
+  <div class="card">
+    <div class="tag tag-blue">2강 3번</div><div class="tag tag-amber">문장 순서</div>
+    <div class="q-label">Q1</div>
+    <div class="q-text">다음 주어진 문장에 이어질 글의 순서로 가장 적절한 것을 배열하시오.</div>
+    <div class="passage-box" style="margin-bottom:10px;"><strong>[주어진 문장]</strong><br>More than a thousand people showed up at the field to cheer for the hometown high school football team.</div>
+    <div class="zone-label">▼ 카드를 탭하여 순서대로 배열하세요</div>
+    <div class="sentence-pieces" id="o1-pool">
+      <div class="piece" data-id="A" onclick="movePiece('o1','A',this)">(A) Everyone was cheering: the crowd waving flags, the cheerleaders, the band playing loud music, the players, and even me!</div>
+      <div class="piece" data-id="B" onclick="movePiece('o1','B',this)">(B) The cheerleaders looked up in delighted surprise. For the first time, they were hearing something come back from the stands — a huge cheer!</div>
+      <div class="piece" data-id="C" onclick="movePiece('o1','C',this)">(C) There was a long line at the ticket booth that stretched down the street. The delicious smell of popcorn and hot dogs was everywhere.</div>
+    </div>
+    <div class="zone-label" style="margin-top:10px;">✅ 선택한 순서</div>
+    <div class="sentence-pieces answer-zone" id="o1-answer"></div>
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button class="nav-btn btn-reset" style="flex:none;padding:10px 16px;font-size:0.82rem;" onclick="resetOrder('o1')">초기화</button>
+      <button class="check-btn" style="margin-bottom:0;" onclick="checkOrder('o1',['C','A','B'])">확인하기</button>
+    </div>
+    <div class="answer-reveal" id="o1-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-blue">10강 3번</div><div class="tag tag-amber">문장 순서</div>
+    <div class="q-label">Q2</div>
+    <div class="q-text">다음 주어진 문장에 이어질 글의 순서로 가장 적절한 것을 배열하시오.</div>
+    <div class="passage-box" style="margin-bottom:10px;"><strong>[주어진 문장]</strong><br>At one end of the spectrum of transformations was the forest gardening practiced by the peoples of New Guinea and Amazonia that mimicked natural growth and left minimal traces on the land.</div>
+    <div class="sentence-pieces" id="o2-pool">
+      <div class="piece" data-id="A" onclick="movePiece('o2','A',this)">(A) Biologically speaking, these species suddenly became very successful. So did other, unwanted species — crops attracted rats, mice, sparrows, and roaches.</div>
+      <div class="piece" data-id="B" onclick="movePiece('o2','B',this)">(B) At the other end was monoculture: cultivating only one species of plant or raising only one species of animal.</div>
+      <div class="piece" data-id="C" onclick="movePiece('o2','C',this)">(C) The beginnings of monoculture can be seen in the wheat fields of the Middle East, the rice paddies of China, and the herds of sheep and goats on the Eurasian steppe.</div>
+    </div>
+    <div class="zone-label" style="margin-top:10px;">✅ 선택한 순서</div>
+    <div class="sentence-pieces answer-zone" id="o2-answer"></div>
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button class="nav-btn btn-reset" style="flex:none;padding:10px 16px;font-size:0.82rem;" onclick="resetOrder('o2')">초기화</button>
+      <button class="check-btn" style="margin-bottom:0;" onclick="checkOrder('o2',['B','C','A'])">확인하기</button>
+    </div>
+    <div class="answer-reveal" id="o2-reveal"></div>
+  </div>
+
+  <div class="card">
+    <div class="tag tag-blue">7강 3번</div><div class="tag tag-amber">문장 순서</div>
+    <div class="q-label">Q3</div>
+    <div class="q-text">다음 주어진 문장에 이어질 글의 순서로 가장 적절한 것을 배열하시오.</div>
+    <div class="passage-box" style="margin-bottom:10px;"><strong>[주어진 문장]</strong><br>Florence Bascom was born in 1862, the youngest of five children.</div>
+    <div class="sentence-pieces" id="o3-pool">
+      <div class="piece" data-id="A" onclick="movePiece('o3','A',this)">(A) She founded the first geology department at Bryn Mawr College. Additionally, Bascom was the first woman geologist hired by the U.S. Geological Survey.</div>
+      <div class="piece" data-id="B" onclick="movePiece('o3','B',this)">(B) Bascom was raised by parents who strongly encouraged their daughter to pursue an education. She entered the University of Wisconsin at the age of 15.</div>
+      <div class="piece" data-id="C" onclick="movePiece('o3','C',this)">(C) Bascom continued her graduate studies at Johns Hopkins University, but was required to sit behind a screen. She graduated with a doctor's degree in geology in 1893.</div>
+    </div>
+    <div class="zone-label" style="margin-top:10px;">✅ 선택한 순서</div>
+    <div class="sentence-pieces answer-zone" id="o3-answer"></div>
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button class="nav-btn btn-reset" style="flex:none;padding:10px 16px;font-size:0.82rem;" onclick="resetOrder('o3')">초기화</button>
+      <button class="check-btn" style="margin-bottom:0;" onclick="checkOrder('o3',['B','C','A'])">확인하기</button>
+    </div>
+    <div class="answer-reveal" id="o3-reveal"></div>
+  </div>
+</div>
+
+<script>
+const VOCAB = {
+  "1강1번": [
+    {w:'refreshment',m:'다과, 간식',syn:'',ant:''},
+    {w:'council',m:'협의회, (지방) 의회',syn:'',ant:''},
+    {w:'unfortunately',m:'안타깝게도',syn:'regrettably, unluckily',ant:'fortunately, luckily'},
+    {w:'due to',m:'~으로 인해',syn:'',ant:''},
+    {w:'conflict',m:'충돌, 갈등',syn:'disagreement, argument',ant:'agreement, harmony, accord'},
+    {w:'community center',m:'지역 문화 회관',syn:'',ant:''},
+    {w:'reschedule',m:'일정을 변경하다',syn:'',ant:''},
+    {w:'sincere',m:'진심 어린',syn:'genuine, heartfelt, earnest',ant:'hypocritical, insincere'},
+    {w:'apology',m:'사과',syn:'excuse',ant:''},
+    {w:'notice',m:'공지',syn:'',ant:''},
+    {w:'cancellation',m:'취소',syn:'annulment',ant:'enforcement'},
+    {w:'contribution',m:'기여, 공헌',syn:'',ant:'hindrance, impediment'},
+    {w:'appreciate',m:'감사하다',syn:'',ant:'depreciate'},
+    {w:'inconvenience',m:'불편',syn:'discomfort, discommodity',ant:'convenience, comfort'},
+    {w:'completely',m:'완전히, 전적히',syn:'entirely, fully',ant:'partially, barely, partly'},
+  ],
+  "1강3번": [
+    {w:'mayor',m:'시장',syn:'',ant:''},
+    {w:'inform',m:'알리다, 공지하다',syn:'notify',ant:'conceal'},
+    {w:'renovate',m:'개조하다, 보수하다',syn:'',ant:'destroy'},
+    {w:'landmark',m:'명소, 유적',syn:'',ant:''},
+    {w:'seating capacity',m:'관객 수용 능력',syn:'',ant:''},
+    {w:'theatrical',m:'연극의',syn:'',ant:''},
+    {w:'financially',m:'재정적으로',syn:'',ant:''},
+    {w:'urge',m:'촉구하다',syn:'encourage, press, drive',ant:'discourage, forbid'},
+    {w:'reconsider',m:'재고하다',syn:'rethink about',ant:'ignore'},
+    {w:'alternative',m:'대안',syn:'',ant:''},
+    {w:'character',m:'특색, 특성',syn:'feature',ant:'commonplaceness'},
+    {w:'secure',m:'획득하다',syn:'obtain, gain',ant:'lose'},
+    {w:'stability',m:'안정',syn:'stabilization, counterpoise',ant:'instability, unstableness'},
+    {w:'short-sighted',m:'근시안적인',syn:'near-sighted, imprudent',ant:'long-sighted, prudent'},
+  ],
+  "2강1번": [
+    {w:'arrange',m:'정돈하다, 배열하다',syn:'organize',ant:'derange, disarrange'},
+    {w:'pound',m:'(심장이) 고동치다',syn:'beat',ant:'stop'},
+    {w:'observe',m:'지켜보다, 관찰하다',syn:'',ant:''},
+    {w:'descend',m:'내려오다',syn:'go down',ant:'climb'},
+    {w:'adjustment',m:'조정',syn:'',ant:''},
+    {w:'equipment',m:'장비',syn:'',ant:''},
+    {w:'anticipation',m:'기대, 예상',syn:'expectation, expectancy',ant:'doubt'},
+    {w:'unveil',m:'드러내다',syn:'reveal, uncover, disclose',ant:'conceal, hide, veil'},
+    {w:'subtle',m:'미묘한',syn:'delicate',ant:'obvious'},
+    {w:'significant',m:'아주 큰, 상당한',syn:'large, important, substantial',ant:'small, unimportant, insignificant'},
+    {w:'crucial',m:'결정적인',syn:'critical, vital, decisive',ant:'unimportant, trivial'},
+    {w:'triumph',m:'승리',syn:'victory',ant:'failure, defeat'},
+    {w:'captivating',m:'매혹적인',syn:'charming, enchanting, alluring, fascinating',ant:'boring, unattractive'},
+    {w:'profound',m:'깊은, 심오한',syn:'deep, significant',ant:'shallow, slight, insignificant'},
+    {w:'reflect on',m:'~을 되돌아보다',syn:'ponder, consider, meditate on',ant:'disregard, neglect'},
+    {w:'utter',m:'말하다',syn:'',ant:''},
+    {w:'crisp',m:'상쾌한, 서늘한',syn:'fresh',ant:'stuffy, suffocating'},
+    {w:'fleeting',m:'순간적인, 한순간의',syn:'',ant:''},
+    {w:'surge',m:'(감정의) 고조',syn:'upsurge',ant:'decline'},
+  ],
+  "2강3번": [
+    {w:'field',m:'경기장',syn:'',ant:''},
+    {w:'cheer',m:'응원하다, 갈채하다',syn:'',ant:'dishearten'},
+    {w:'stretch',m:'늘어지다, 뻗쳐지다',syn:'',ant:''},
+    {w:'refreshment',m:'다과, 가벼운 음식들',syn:'',ant:''},
+    {w:'stand',m:'노점, 관중석',syn:'',ant:''},
+    {w:'run out of',m:'~이 다 나다',syn:'exhaust, deplete',ant:'have a bunch of, have a great deal of'},
+    {w:'official',m:'경기 위원',syn:'',ant:''},
+    {w:'run',m:'운영하다',syn:'manage, operate',ant:'close, discontinue'},
+    {w:'stomp',m:'(발로) 쿵쿵 구르다',syn:'',ant:''},
+    {w:'delighted',m:'아주 즐거운',syn:'happy, pleased, glad, overjoyed',ant:'sad, sorrowful, depressed'},
+    {w:'backflip',m:'뒤로 재주넘기',syn:'',ant:''},
+    {w:'bleachers',m:'노천 관람석',syn:'',ant:''},
+    {w:'cartwheel',m:'옆으로 재주넘기',syn:'',ant:''},
+  ],
+  "3강1번": [
+    {w:'myth',m:'신화, 근거 없는 믿음',syn:'',ant:'fact'},
+    {w:'face',m:'표면, 외관',syn:'outer side',ant:'inner side'},
+    {w:'rationale',m:'근거, 이유',syn:'',ant:''},
+    {w:'master',m:'숙달하다',syn:'perfect oneself in, attain proficiency in',ant:'be unfamiliar with, be bad at'},
+    {w:'field',m:'분야, 전장',syn:'',ant:''},
+    {w:'domain',m:'영역, 분야',syn:'',ant:''},
+    {w:'expertise',m:'전문성',syn:'professionalism, professionality',ant:'amateurishness'},
+    {w:'nonetheless',m:'그래도, 그럼에도 불구하고',syn:'',ant:''},
+    {w:'diminish',m:'줄어들다, 약해지다',syn:'decrease, weaken',ant:'increase, improve'},
+    {w:'insight',m:'통찰(력)',syn:'',ant:''},
+    {w:'heavily',m:'아주 많이, 심하게',syn:'',ant:''},
+    {w:'invest',m:'(시간·노력을) 쏟다, 투자하다',syn:'',ant:''},
+    {w:'overlook',m:'간과하다',syn:'disregard, neglect',ant:'consider, pay attention to'},
+  ],
+  "3강3번": [
+    {w:'hand down',m:'~을 물려주다',syn:'pass on, give',ant:'receive'},
+    {w:'community',m:'공동체',syn:'',ant:''},
+    {w:'at large',m:'전반적인, 전체적인',syn:'generally, widely, on the whole',ant:'partially, in part'},
+    {w:'expectation',m:'기대',syn:'',ant:''},
+    {w:'standard',m:'기준',syn:'',ant:''},
+    {w:'norm',m:'규범',syn:'',ant:''},
+    {w:'invisible',m:'눈에 보이지 않는',syn:'unseen',ant:'visible'},
+    {w:'keep in mind',m:'~을 마음속에 두다, ~을 기억하다',syn:'bear in mind',ant:'overlook, disregard'},
+    {w:'custom',m:'관습',syn:'',ant:''},
+    {w:'practice',m:'관행',syn:'',ant:''},
+    {w:'sweep along',m:'~의 정신을 온통 빼앗다',syn:'',ant:''},
+  ],
+  "7강1번": [
+    {w:'influential',m:'영향을 주는',syn:'dominant, important',ant:'unimportant, insignificant'},
+    {w:'favor',m:'선호하다',syn:'prefer, like',ant:'hate, dislike'},
+    {w:'force',m:'강요하다',syn:'press, drive',ant:'discourage, forbid'},
+    {w:'maintain',m:'유지하다',syn:'keep, hold, sustain',ant:'abandon, deny, discontinue'},
+    {w:'nursing',m:'간호(학)',syn:'',ant:''},
+    {w:'spark',m:'촉발하다, 야기하다',syn:'trigger',ant:'cease, halt'},
+    {w:'passion',m:'열정',syn:'enthusiasm',ant:'indifference, apathy'},
+    {w:'physical therapy',m:'물리 치료',syn:'',ant:''},
+    {w:'bowl',m:'그릇',syn:'',ant:''},
+    {w:'come in handy',m:'도움이 되다, 쓸모 있다',syn:'be helpful, be of use',ant:'be useless, be worthless'},
+    {w:'certify',m:'자격증을 교부하다, 증명하다',syn:'',ant:''},
+  ],
+  "7강3번": [
+    {w:'raise',m:'양육하다',syn:'rear, bring up, nurture',ant:'abandon'},
+    {w:'encourage',m:'권장하다, 격려하다',syn:'promote, stimulate',ant:'discourage, forbid'},
+    {w:'bachelor\'s degree',m:'학사 학위',syn:'',ant:''},
+    {w:'graduate',m:'대학원의',syn:'',ant:''},
+    {w:'distract',m:'집중을 방해하다',syn:'disturb, interrupt',ant:'help'},
+    {w:'geology',m:'지질학',syn:'',ant:'cf) geography 지리학'},
+    {w:'found',m:'설립하다',syn:'establish, set up',ant:'end, close'},
+    {w:'department',m:'학과',syn:'',ant:''},
+    {w:'additionally',m:'게다가',syn:'',ant:''},
+    {w:'hire',m:'고용하다',syn:'recruit',ant:'fire, dismiss'},
+  ],
+  "8강1번": [
+    {w:'urban',m:'도시의',syn:'',ant:'rural'},
+    {w:'obtain',m:'얻다, 획득하다',syn:'secure, gain',ant:'lose'},
+    {w:'supply',m:'공급',syn:'',ant:'demand'},
+    {w:'intensive',m:'집약적인, 집중적인',syn:'concentrated, intense',ant:'moderate, weak'},
+    {w:'agriculture',m:'농업',syn:'',ant:''},
+    {w:'labor',m:'노동(력)',syn:'',ant:''},
+    {w:'productivity',m:'생산성',syn:'',ant:''},
+    {w:'relevant',m:'적절한, 타당한',syn:'appropriate',ant:'irrelevant, inappropriate'},
+    {w:'primitive',m:'원시적인, 원시의',syn:'primeval',ant:'modern'},
+    {w:'output',m:'생산(량), 산출(량)',syn:'production, yield',ant:'input, intake'},
+    {w:'surplus',m:'잉여(물), 나머지',syn:'remainder, superfluity',ant:'lack, scarcity'},
+    {w:'available',m:'이용 가능한',syn:'accessible',ant:'unavailable, inaccessible'},
+    {w:'distance',m:'거리',syn:'',ant:''},
+    {w:'transport',m:'수송, 운반',syn:'',ant:''},
+    {w:'irrigate',m:'관개하다, 물을 대다',syn:'',ant:''},
+    {w:'subsistence',m:'생존',syn:'',ant:'extinction'},
+    {w:'irrigation canal',m:'용수로(경작지로 물을 보내는 통로)',syn:'',ant:''},
+  ],
+  "8강3번": [
+    {w:'innovation',m:'혁신, 획기적인 것',syn:'',ant:''},
+    {w:'living standard',m:'생활 수준',syn:'',ant:''},
+    {w:'bring about',m:'~을 초래하다',syn:'cause',ant:'ruin, prevent'},
+    {w:'paradoxical',m:'역설의',syn:'',ant:''},
+    {w:'suppose',m:'생각하다',syn:'',ant:''},
+    {w:'come along',m:'생기다, 나타나다',syn:'appear, emerge',ant:'disappear'},
+    {w:'purchase',m:'구매하다',syn:'buy',ant:'sell'},
+    {w:'be better off',m:'(행복이나 처지가) 더 낫다',syn:'',ant:'be worse'},
+    {w:'accompanying',m:'수반하는',syn:'',ant:'disconnected'},
+    {w:'GDP',m:'국내 총생산',syn:'',ant:''},
+    {w:'revenue',m:'수입',syn:'income',ant:'expenditure'},
+    {w:'accrue to',m:'~에게 생기다',syn:'',ant:''},
+  ],
+  "10강1번": [
+    {w:'establish',m:'형성하다',syn:'set up, form',ant:'abolish, finish'},
+    {w:'bond',m:'유대',syn:'connection, attachment',ant:'detachment, enmity'},
+    {w:'define',m:'규정하다',syn:'',ant:''},
+    {w:'distinct',m:'별개의',syn:'separate',ant:'similar (to)'},
+    {w:'deceased',m:'사망한',syn:'dead',ant:'living'},
+    {w:'serve',m:'(~한) 역할을 하다',syn:'',ant:''},
+    {w:'inanimate',m:'무생물의',syn:'lifeless',ant:'animate, living'},
+    {w:'attribute',m:'~이 (~에게) 있다고 생각하다',syn:'',ant:''},
+    {w:'memorabilia',m:'기념품',syn:'',ant:''},
+  ],
+  "10강3번": [
+    {w:'spectrum',m:'범위, 영역',syn:'',ant:''},
+    {w:'transformation',m:'변화',syn:'change, alteration',ant:'sameness, preservation'},
+    {w:'mimic',m:'모방하다',syn:'imitate, copy',ant:'ignore'},
+    {w:'minimal',m:'최소한의',syn:'minimum',ant:'maximum, maximal'},
+    {w:'monoculture',m:'단일 재배',syn:'',ant:''},
+    {w:'cultivate',m:'재배하다, 경작하다',syn:'',ant:''},
+    {w:'reproduction',m:'번식, 생식',syn:'',ant:''},
+    {w:'unwanted',m:'원치 않는',syn:'unnecessary, undesirable, useless',ant:'desired, necessary, useful'},
+    {w:'ripen',m:'익다, 숙성하다',syn:'',ant:''},
+    {w:'roach',m:'바퀴벌레',syn:'',ant:''},
+    {w:'habitat',m:'서식지',syn:'',ant:''},
+    {w:'rice paddy',m:'논',syn:'',ant:''},
+    {w:'steppe',m:'스텝 지대(대초원)',syn:'',ant:''},
+  ],
+  "11강1번": [
+    {w:'avoid',m:'피하다',syn:'evade, escape',ant:'confront, face'},
+    {w:'predict',m:'예측하다',syn:'forecast, foretell, anticipate',ant:'doubt, question'},
+    {w:'biologist',m:'생물학자',syn:'',ant:''},
+    {w:'author',m:'저자',syn:'',ant:''},
+    {w:'decade',m:'10년',syn:'',ant:''},
+    {w:'utter',m:'완전한',syn:'complete, absolute',ant:'incomplete, imperfect'},
+    {w:'breakdown',m:'붕괴, 몰락',syn:'collapse, downfall',ant:'rehabilitation, success'},
+    {w:'capacity',m:'능력',syn:'capability, ability',ant:'incapacity, inability'},
+    {w:'have another go',m:'다시 하다',syn:'',ant:''},
+    {w:'deadline',m:'시간, 기한',syn:'',ant:''},
+    {w:'stance',m:'자세',syn:'',ant:''},
+    {w:'pessimist',m:'비관론자',syn:'',ant:'optimist'},
+    {w:'doomer',m:'운명론자',syn:'',ant:''},
+  ],
+  "11강3번": [
+    {w:'instantly',m:'즉각적으로',syn:'immediately, promptly',ant:'slowly, gradually'},
+    {w:'arresting',m:'시선을 사로잡는',syn:'striking, eye-catching',ant:'boring, unimpressive'},
+    {w:'be charged with',m:'~으로 가득 차 있다',syn:'be full of, be filled with',ant:''},
+    {w:'urgency',m:'긴급함',syn:'emergency',ant:'calmness'},
+    {w:'from a distance',m:'멀리서',syn:'from far away, from afar',ant:'at walking distance'},
+    {w:'formerly',m:'이전에',syn:'previously',ant:'recently, later'},
+    {w:'telephone kiosk',m:'공중전화 박스',syn:'',ant:''},
+    {w:'obvious',m:'눈에 띄는, 명백한',syn:'conspicuous, apparent',ant:'inconspicuous, obscure'},
+    {w:'shade',m:'음영, 색조',syn:'',ant:''},
+    {w:'reddish-brown',m:'적갈색의',syn:'',ant:''},
+    {w:'relatively',m:'비교적, 상대적으로',syn:'',ant:''},
+    {w:'indeed',m:'실제로',syn:'',ant:''},
+    {w:'mainland',m:'대륙, 본토',syn:'',ant:''},
+    {w:'full-on',m:'완전한',syn:'complete, entire',ant:'faint'},
+    {w:'splash',m:'(액체의) 방울',syn:'',ant:''},
+  ],
+  "12강1번": [
+    {w:'pumpkin',m:'호박',syn:'',ant:''},
+    {w:'suitable',m:'적합한',syn:'appropriate, proper, suited',ant:'unsuitable, inappropriate, improper'},
+    {w:'peel',m:'껍질을 벗기다',syn:'',ant:''},
+    {w:'mash',m:'으깨다',syn:'',ant:''},
+    {w:'combine',m:'섞다, 결합하다',syn:'merge, blend',ant:'separate, divide'},
+    {w:'ingredient',m:'재료',syn:'',ant:''},
+    {w:'pour',m:'부어 넣다',syn:'',ant:''},
+    {w:'mixture',m:'혼합물',syn:'',ant:''},
+    {w:'labor',m:'노동',syn:'',ant:''},
+    {w:'cholesterol',m:'콜레스테롤',syn:'',ant:''},
+    {w:'lard',m:'돼지기름',syn:'',ant:''},
+    {w:'shortening',m:'쇼트닝(제빵 등에 쓰이는 기름)',syn:'',ant:''},
+  ],
+  "12강3번": [
+    {w:'expect',m:'예상하다',syn:'forecast',ant:''},
+    {w:'seek out',m:'찾아내다',syn:'',ant:''},
+    {w:'run',m:'운영하다',syn:'operate',ant:'close'},
+    {w:'snap',m:'성급한',syn:'hasty, rash, impetuous, impatient',ant:'sluggish, prudent'},
+    {w:'resolve',m:'해결하다',syn:'settle',ant:'worsen'},
+    {w:'aspect',m:'측면',syn:'',ant:''},
+    {w:'look to',m:'기대하다',syn:'expect, anticipate',ant:'forbid'},
+    {w:'generally',m:'일반적으로',syn:'usually, commonly',ant:'uncommonly, unusually'},
+    {w:'due',m:'적절한',syn:'right, proper, appropriate',ant:'inappropriate, unsuitable'},
+    {w:'consideration',m:'고려',syn:'',ant:''},
+    {w:'defer to',m:'~에 따르다',syn:'submit to, obey',ant:'disobey, defy'},
+  ],
+};
+
+const UNIT_LABELS = Object.keys(VOCAB);
+
+// 모든 뜻 풀 (오답 보기용)
+function getAllMeanings() {
+  const all = [];
+  UNIT_LABELS.forEach(u => VOCAB[u].forEach(v => { if(v.m) all.push(v.m); }));
+  return [...new Set(all)];
+}
+const ALL_MEANINGS = getAllMeanings();
+
+// TAB
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// UNIT BUTTONS
+const unitGrid = document.getElementById('unit-grid');
+let selectedUnits = [];
+UNIT_LABELS.forEach(u => {
+  const btn = document.createElement('button');
+  btn.className = 'unit-btn';
+  btn.innerHTML = u + `<span class="unit-count">${VOCAB[u].length}개</span>`;
+  btn.onclick = () => toggleUnit(u, btn);
+  unitGrid.appendChild(btn);
+});
+
+function toggleUnit(u, btn) {
+  const idx = selectedUnits.indexOf(u);
+  if(idx===-1){ selectedUnits.push(u); btn.classList.add('selected'); }
+  else { selectedUnits.splice(idx,1); btn.classList.remove('selected'); }
+  const sb = document.getElementById('start-btn');
+  if(selectedUnits.length > 0) {
+    const cnt = selectedUnits.reduce((a,u)=>a+VOCAB[u].length,0);
+    sb.disabled = false;
+    sb.textContent = `선택된 단어 ${cnt}개로 시작하기 →`;
+  } else {
+    sb.disabled = true; sb.textContent = '강을 선택하세요';
+  }
+}
+
+// QUIZ STATE
+let quizCards = [], currentIdx = 0, correctCount = 0, answered = false;
+
+// 카드 빌드: 원래단어 + 유의어들만
+function buildCards() {
+  const cards = [];
+  selectedUnits.forEach(u => {
+    VOCAB[u].forEach(v => {
+      // 원래 단어 카드
+      cards.push({ type:'word', question:v.w, answer:v.m, original:v.w, syn:v.syn, ant:v.ant });
+      // 유의어 카드들
+      if(v.syn) {
+        v.syn.split(',').map(s=>s.trim()).filter(Boolean).forEach(s => {
+          cards.push({ type:'syn', question:s, answer:v.m, original:v.w, syn:v.syn, ant:v.ant });
+        });
+      }
+    });
+  });
+  // shuffle & limit
+  for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]];}
+  return cards.slice(0, Math.min(cards.length, 50));
+}
+
+function getWrongOptions(correctMeaning) {
+  const pool = ALL_MEANINGS.filter(m => m !== correctMeaning);
+  const shuffled = pool.sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,3);
+}
+
+function startVocabQuiz() {
+  quizCards = buildCards();
+  currentIdx = 0; correctCount = 0; answered = false;
+  document.getElementById('unit-select-area').style.display='none';
+  document.getElementById('quiz-area').style.display='block';
+  document.getElementById('score-area').style.display='none';
+  renderCard();
+}
+
+function renderCard() {
+  if(currentIdx >= quizCards.length){ showScore(); return; }
+  answered = false;
+  const card = quizCards[currentIdx];
+  const total = quizCards.length;
+  document.getElementById('progress-text').textContent = `${currentIdx+1} / ${total}`;
+  document.getElementById('progress-bar').style.width = `${(currentIdx/total)*100}%`;
+
+  // badge
+  const badge = document.getElementById('card-badge');
+  if(card.type==='syn'){ badge.textContent='(유) 유의어'; badge.className='card-type-badge badge-syn'; }
+  else if(card.type==='ant'){ badge.textContent='(반) 반의어'; badge.className='card-type-badge badge-ant'; }
+  else { badge.textContent='단어'; badge.className='card-type-badge badge-word'; }
+
+  document.getElementById('card-question').textContent = card.question;
+  document.getElementById('card-subtext').textContent = '→ 한글 뜻을 고르세요';
+  document.getElementById('result-box-area').innerHTML = '';
+  document.getElementById('next-btn').style.display = 'none';
+
+  // 보기: 한글 뜻 4개
+  const wrongs = getWrongOptions(card.answer);
+  const opts = [card.answer, ...wrongs].sort(()=>Math.random()-0.5);
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = o;
+    btn.onclick = () => selectAnswer(o, card, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function selectAnswer(selected, card, btn) {
+  if(answered) return;
+  answered = true;
+  const isCorrect = selected === card.answer;
+  if(isCorrect) correctCount++;
+
+  // 보기 색상
+  document.querySelectorAll('.option-btn').forEach(b => {
+    b.disabled = true;
+    if(b.textContent === card.answer) b.classList.add('correct');
+    else if(b === btn && !isCorrect) b.classList.add('wrong');
+  });
+
+  // 정답 박스 — 뜻 + 원래단어 + (유) + (반)
+  const box = document.getElementById('result-box-area');
+  let html = `<div class="result-box ${isCorrect?'correct':'wrong'}">`;
+  html += `<div class="result-title ${isCorrect?'correct':'wrong'}">${isCorrect?'✅ 정답!':'❌ 오답'}</div>`;
+  html += `<div class="result-meaning">뜻: ${card.answer}</div>`;
+  if(card.type!=='word') html += `<div class="result-original">원래 단어: <strong>${card.original}</strong></div>`;
+  if(card.syn) html += `<div class="result-syn">🟢 (유) ${card.syn}</div>`;
+  html += `</div>`;
+  box.innerHTML = html;
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextCard() { currentIdx++; renderCard(); }
+
+function showScore() {
+  document.getElementById('score-area').style.display='block';
+  const total = quizCards.length;
+  const pct = Math.round((correctCount/total)*100);
+  document.getElementById('score-num').textContent = `${pct}%`;
+  document.getElementById('score-total').textContent = `${correctCount} / ${total} 정답`;
+  document.getElementById('score-emoji').textContent = pct>=80?'🎉':pct>=60?'👍':'💪';
+  document.getElementById('score-label').textContent = pct>=80?'훌륭해요! 완벽에 가깝습니다':pct>=60?'잘했어요! 조금 더 복습해봐요':'다시 한번 도전해봐요!';
+  document.getElementById('progress-bar').style.width='100%';
+}
+
+function restartVocab() { document.getElementById('score-area').style.display='none'; startVocabQuiz(); }
+function resetVocab() {
+  selectedUnits=[];
+  document.querySelectorAll('.unit-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('unit-select-area').style.display='block';
+  document.getElementById('quiz-area').style.display='none';
+  const sb=document.getElementById('start-btn');
+  sb.disabled=true; sb.textContent='강을 선택하세요';
+}
+
+// GRAMMAR
+let gSelected = {};
+function selectGChoice(id, num) {
+  gSelected[id] = num;
+  document.querySelectorAll(`#${id}-choices .option-btn`).forEach(b=>{
+    b.style.borderColor = b.textContent===num?'var(--blue)':'';
+  });
+}
+function checkGrammar(id, correctNum, correctForm) {
+  const input = document.getElementById(`${id}-input`).value.trim().toLowerCase();
+  const selNum = gSelected[id];
+  const numOk = selNum===correctNum;
+  const formOk = input===correctForm.toLowerCase();
+  const ok = numOk && formOk;
+  document.querySelectorAll(`#${id}-choices .option-btn`).forEach(b=>{
+    if(b.textContent===correctNum) b.classList.add('correct');
+    else if(b.textContent===selNum && !numOk) b.classList.add('wrong');
+  });
+  document.getElementById(`${id}-input`).className='answer-input '+(formOk?'correct':'wrong');
+  const rev=document.getElementById(`${id}-reveal`);
+  rev.className='answer-reveal show '+(ok?'correct':'wrong');
+  rev.innerHTML=(ok?'✅ 정답! ':'❌ ')+`번호: <strong>${correctNum}</strong> → 올바른 형태: <strong>${correctForm}</strong>`;
+}
+function checkGrammar3() {
+  const a=document.getElementById('g3a-input').value.trim().toLowerCase();
+  const b=document.getElementById('g3b-input').value.trim().toLowerCase();
+  const okA=a==='logical', okB=b==='hinder';
+  document.getElementById('g3a-input').className='answer-input '+(okA?'correct':'wrong');
+  document.getElementById('g3b-input').className='answer-input '+(okB?'correct':'wrong');
+  const rev=document.getElementById('g3-reveal');
+  rev.className='answer-reveal show '+((okA&&okB)?'correct':'wrong');
+  rev.innerHTML=((okA&&okB)?'✅ 정답! ':'❌ ')+`(A): <strong>logical</strong> (논리적으로 보인다) / (B): <strong>hinder</strong> (창의성을 저해할 수 있다)`;
+}
+function checkGrammar4() {
+  const a=document.getElementById('g4a-input').value.trim().toLowerCase();
+  const b=document.getElementById('g4b-input').value.trim().toLowerCase();
+  const c=document.getElementById('g4c-input').value.trim().toLowerCase();
+  const okA=a==='force', okB=b==='which', okC=c==='holding';
+  document.getElementById('g4a-input').className='answer-input '+(okA?'correct':'wrong');
+  document.getElementById('g4b-input').className='answer-input '+(okB?'correct':'wrong');
+  document.getElementById('g4c-input').className='answer-input '+(okC?'correct':'wrong');
+  const rev=document.getElementById('g4-reveal');
+  rev.className='answer-reveal show '+((okA&&okB&&okC)?'correct':'wrong');
+  rev.innerHTML=((okA&&okB&&okC)?'✅ 정답! ':'❌ ')+`(A): <strong>force</strong> (used to+동사원형) / (B): <strong>which</strong> (계속적 관계대명사) / (C): <strong>holding</strong> (while+분사구문)`;
+}
+
+// FILL
+function checkFill(idA, ansA, idB, ansB, revId) {
+  const va=document.getElementById(idA).value.trim().toLowerCase();
+  const vb=document.getElementById(idB).value.trim().toLowerCase();
+  const okA=va===ansA, okB=vb===ansB;
+  document.getElementById(idA).className='blank-input '+(okA?'correct':'wrong');
+  document.getElementById(idB).className='blank-input '+(okB?'correct':'wrong');
+  const rev=document.getElementById(revId);
+  rev.className='answer-reveal show '+((okA&&okB)?'correct':'wrong');
+  rev.innerHTML=((okA&&okB)?'✅ 정답! ':'❌ ')+`(A): <strong>${ansA}</strong> / (B): <strong>${ansB}</strong>`;
+}
+function checkFill4() {
+  const a=document.getElementById('f4a').value.trim().toLowerCase();
+  const b=document.getElementById('f4b').value.trim().toLowerCase();
+  const c=document.getElementById('f4c').value.trim().toLowerCase();
+  const okA=a==='encouraged', okB=b==='founded', okC=c==='hired';
+  document.getElementById('f4a').className='answer-input '+(okA?'correct':'wrong');
+  document.getElementById('f4b').className='answer-input '+(okB?'correct':'wrong');
+  document.getElementById('f4c').className='answer-input '+(okC?'correct':'wrong');
+  const rev=document.getElementById('f4-reveal');
+  rev.className='answer-reveal show '+((okA&&okB&&okC)?'correct':'wrong');
+  rev.innerHTML=((okA&&okB&&okC)?'✅ 정답! ':'❌ ')+`(A): <strong>encouraged</strong> / (B): <strong>founded</strong> / (C): <strong>hired</strong>`;
+}
+
+// ORDER
+let orderState = {};
+function movePiece(qid, pid, el) {
+  if(!orderState[qid]) orderState[qid]=[];
+  const pool=document.getElementById(`${qid}-pool`);
+  const ans=document.getElementById(`${qid}-answer`);
+  if(el.parentNode===pool){ orderState[qid].push(pid); el.classList.add('placed'); ans.appendChild(el); }
+  else { orderState[qid]=orderState[qid].filter(x=>x!==pid); el.classList.remove('placed'); pool.appendChild(el); }
+}
+function resetOrder(qid) {
+  orderState[qid]=[];
+  const pool=document.getElementById(`${qid}-pool`);
+  const ans=document.getElementById(`${qid}-answer`);
+  Array.from(ans.children).forEach(el=>{el.classList.remove('placed');pool.appendChild(el);});
+  const rev=document.getElementById(`${qid}-reveal`);
+  rev.className='answer-reveal'; rev.innerHTML='';
+}
+function checkOrder(qid, correct) {
+  const state=orderState[qid]||[];
+  if(state.length!==correct.length){
+    const rev=document.getElementById(`${qid}-reveal`);
+    rev.className='answer-reveal show wrong';
+    rev.innerHTML=`❌ 모든 문장을 배열해주세요. (${state.length}/${correct.length})`;
+    return;
+  }
+  const ok=state.every((v,i)=>v===correct[i]);
+  const rev=document.getElementById(`${qid}-reveal`);
+  rev.className='answer-reveal show '+(ok?'correct':'wrong');
+  rev.innerHTML=(ok?'✅ 정답! ':'❌ 오답 — ')+`정답 순서: <strong>${correct.join(' → ')}</strong>`;
+}
+</script>
+</body>
+</html>
